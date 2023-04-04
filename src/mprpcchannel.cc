@@ -156,3 +156,17 @@ void MprpcChannel::CallMethod(const google::protobuf::MethodDescriptor* method,
 
     close(clientfd);
 }
+
+MprpcChannel::MprpcChannel()
+{
+    // 读取配置文件rpcserver的信息
+    // std::string ip = MprpcApplication::GetInstance().GetConfig().Load("rpcserverip");
+    // uint16_t port = atoi(MprpcApplication::GetInstance().GetConfig().Load("rpcserverport").c_str());
+    // rpc调用方想调用service_name的method_name服务，需要查询zk上该服务所在的host信息
+    
+    m_zkCli.Start();
+    // todo:待完成zk的节点记录
+    // 本项目zookeepr的节点组织方式如下：
+    //  /UserServiceRpc/Login
+    std::string method_path = "/" + service_name + "/" + method_name;
+}
