@@ -3,6 +3,7 @@
 #include <semaphore.h>
 #include <zookeeper/zookeeper.h>
 #include <string>
+#include <vector>
 static const int32_t zoo_path_buf_len = 1024;
 static const int32_t zoo_value_buf_len = 10240;
 
@@ -113,17 +114,27 @@ private:
 class ZkClient : public noncopyable
 {
 public:
-public:
     ZkClient();
     ~ZkClient();
     // zkclient启动连接zkserver
     void Start();
-    // 在zkserver上根据指定的path创建znode节点
+    
+
+    /// @brief // 在zkserver上根据指定的path创建znode节点 
+    /// @param path 
+    /// @param data 
+    /// @param datalen 
+    /// @param state 默认为0（永久节点）
     void Create(const char *path, const char *data, int datalen, int state = 0);
     // 根据参数指定的znode节点路径，获取znode节点的值
     std::string GetData(const char *path);
     // 获取节点值
     zoo_rc get_node(const char *path, std::string &out_value, bool watch);
+    /// @brief children不是全路径，是短路径
+    /// @param path 
+    /// @param children 
+    /// @param watch 
+    /// @return 
     zoo_rc get_children(const char *path, std::vector<std::string> &children, bool watch);
     zoo_rc delete_node(const char *path, int32_t version = -1);
     zoo_rc exists_node(const char *path, zoo_state_t *info = nullptr, bool watch = true);
@@ -141,7 +152,12 @@ public:
     // // 设置节点的子节点变化(增/减)的通知回调函数
     // zoo_rc watch_children_event(const char *path, const child_event_handler_t &handler, std::vector<std::string> *out_children);
     // todo:待完成
+
+    /// @brief 节点删除回调
+    /// @param path 
     void on_path_delete(const char *path);
+    /// @brief 节点数据改变回调，完成：重新注册watcher和执行其他业务
+    /// @param path 
     void on_path_data_change(const char *path);
     void on_path_child_change(const char* path);
 private:
@@ -151,6 +167,6 @@ private:
 
 struct Context
 {
-    sem_t m_sem;
+    sem_t* m_sem;
     ZkClient *m_zkclient;
 };

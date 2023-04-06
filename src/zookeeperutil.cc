@@ -7,30 +7,39 @@
 void global_watcher(zhandle_t *zh, int type,
 					int state, const char *path, void *watcherCtx)
 {
-	ZkClient* zkClient = ((Context *)zoo_get_context(zh))->m_zkclient;
+
+	Context * contextPtr = (Context *)zoo_get_context(zh);
+	ZkClient *zkClient = contextPtr->m_zkclient;
 	if (type == ZOO_SESSION_EVENT) // 回调的消息类型是和会话相关的消息类型
 	{
 		if (state == ZOO_CONNECTED_STATE) // zkclient和zkserver连接成功
 		{
-			sem_t *sem = &(((Context *)zoo_get_context(zh))->m_sem); // 把注册的上下文信息拿回来，原来注册了信号量
-			sem_post(sem);							   // post信号量
+			// sem_t *sem = (sem_t*)zoo_get_context(zh); // 把注册的上下文信息拿回来，原来注册了信号量
+			// sem_t *sem = &(((Context *)zoo_get_context(zh))->m_sem); // 好像zoo_get_context只能拿回一次消息，第二次调用是拿不回来的
+			sem_t *sem = contextPtr->m_sem;
+			sem_post(sem);											 // post信号量
 		}
-	}else if (type == ZOO_CREATED_EVENT) {
-		std::cout<<"ZOO_CREATED_EVENT   path:;"<<path<<std::endl;
-            // zkClient->on_path_created(path);
-        }
-        else if (type == ZOO_DELETED_EVENT) {
-			std::cout<<"ZOO_DELETED_EVENT   path:;"<<path<<std::endl;
-            zkClient->on_path_delete(path);
-        }
-        else if (type == ZOO_CHANGED_EVENT) {
-			std::cout<<"ZOO_CHANGED_EVENT   path:"<<path<<std::endl;
-            zkClient->on_path_data_change(path);
-        }
-        else if (type == ZOO_CHILD_EVENT) {
-			std::cout<<"ZOO_CHILD_EVENT   path:"<<path<<std::endl;
-            zkClient->on_path_child_change(path);
-        }
+	}
+	else if (type == ZOO_CREATED_EVENT)
+	{
+		std::cout << "ZOO_CREATED_EVENT   path:;" << path << std::endl;
+		// zkClient->on_path_created(path);
+	}
+	else if (type == ZOO_DELETED_EVENT)
+	{
+		std::cout << "ZOO_DELETED_EVENT   path:;" << path << std::endl;
+		zkClient->on_path_delete(path);
+	}
+	else if (type == ZOO_CHANGED_EVENT)
+	{
+		std::cout << "ZOO_CHANGED_EVENT   path:" << path << std::endl;
+		zkClient->on_path_data_change(path);
+	}
+	else if (type == ZOO_CHILD_EVENT)
+	{
+		std::cout << "ZOO_CHILD_EVENT   path:" << path << std::endl;
+		zkClient->on_path_child_change(path);
+	}
 }
 
 ZkClient::ZkClient() : m_zhandle(nullptr)
@@ -69,7 +78,9 @@ void ZkClient::Start()
 	sem_t sem;
 	sem_init(&sem, 0, 0);
 
-	Context c;c.m_sem = sem;c.m_zkclient = this;
+	Context c;
+	c.m_sem = &sem;
+	c.m_zkclient = this;
 	zoo_set_context(m_zhandle, &c); // 给指定的zookeeper添加上下文，可以理解成让zookeeper带了一些信息
 
 	sem_wait(&sem); // 调用肯定会阻塞，阻塞到调用回调global_watcher（回调里面写了post）
@@ -81,7 +92,7 @@ void ZkClient::Create(const char *path, const char *data, int datalen, int state
 {
 	char path_buffer[128];
 	int bufferlen = sizeof(path_buffer);
-	int flag;
+	int flag = 0;
 	// 先判断path表示的znode节点是否存在，如果存在，就不再重复创建了
 	flag = zoo_exists(m_zhandle, path, 0, nullptr);
 	if (ZNONODE == flag) // 表示path的znode节点不存在
@@ -91,12 +102,11 @@ void ZkClient::Create(const char *path, const char *data, int datalen, int state
 						  &ZOO_OPEN_ACL_UNSAFE, state, path_buffer, bufferlen); // 这个api还不是很清楚
 		if (flag == ZOK)
 		{
-			std::cout << "znode create success... path:" << path << std::endl;
+			std::cout << "znode create success... path:" << path_buffer << std::endl;
 		}
 		else
 		{
-			std::cout << "flag:" << flag << std::endl;
-			std::cout << "znode create error... path:" << path << std::endl;
+			std::cout << "znode create error... path:" << path_buffer <<  "  flag:" << flag<< std::endl;
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -193,4 +203,40 @@ zoo_rc ZkClient::exists_node(const char *path, zoo_state_t *info, bool watch)
 	}
 
 	return rt;
+}
+
+void ZkClient::on_path_delete(const char *path)
+{
+	char buff[1024] = {0};
+	sprintf(buff, " zk_cpp::on_path_delete, path[%s]\n", path);
+	std::cout << buff << std::endl;
+}
+
+void ZkClient::on_path_data_change(const char *path)
+{
+	char buff[1024] = {0};
+	sprintf(buff, " zk_cpp::on_path_data_change, path[%s]\n", path);
+	std::cout << buff << std::endl;
+
+	std::string outValue;
+	zoo_rc rt = get_node(path, outValue, true);
+	if (rt != z_ok)
+	{
+		std::cerr << "get_node error ~~~" << std::endl;
+		return;
+	}
+	// todo:重新读取节点数据写入hash环
+}
+
+void ZkClient::on_path_child_change(const char *path)
+{
+	std::vector<std::string> children;
+	bool watch = true;
+	zoo_rc rt = get_children(path, children, watch);
+	if (rt != z_ok)
+	{
+		std::cerr << "get_children error ~~~" << std::endl;
+		return;
+	}
+	//todo 根据子节点重新写hash环
 }

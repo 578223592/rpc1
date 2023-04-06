@@ -5,7 +5,7 @@
 #include "zookeeperutil.h"
 
 /*
-service_name =>  service描述   
+service_name =>  service描述
                         =》 service* 记录服务对象
                         method_name  =>  method方法对象
 json   protobuf
@@ -26,10 +26,10 @@ void RpcProvider::NotifyService(google::protobuf::Service *service)
     // std::cout << "service_name:" << service_name << std::endl;
     LOG_INFO("service_name:%s", service_name.c_str());
 
-    for (int i=0; i < methodCnt; ++i)
+    for (int i = 0; i < methodCnt; ++i)
     {
         // 获取了服务对象指定下标的服务方法的描述（抽象描述） UserService   Login
-        const google::protobuf::MethodDescriptor* pmethodDesc = pserviceDesc->method(i);
+        const google::protobuf::MethodDescriptor *pmethodDesc = pserviceDesc->method(i);
         std::string method_name = pmethodDesc->name();
         service_info.m_methodMap.insert({method_name, pmethodDesc});
 
@@ -57,8 +57,8 @@ void RpcProvider::Run()
     如果要在回调函数中访问和修改TcpConnection对象的状态，需要通过参数的形式将当前对象的指针传递进去，并且保证回调函数在当前对象的上下文环境中被调用。这种方式比较复杂，容易出错，也不便于代码的编写和维护。因此，使用std::bind将回调函数和TcpConnection对象绑定起来，可以更加方便、直观地访问和修改对象的状态，同时也可以避免一些常见的错误。
     */
     server.setConnectionCallback(std::bind(&RpcProvider::OnConnection, this, std::placeholders::_1));
-    server.setMessageCallback(std::bind(&RpcProvider::OnMessage, this, std::placeholders::_1, 
-            std::placeholders::_2, std::placeholders::_3));
+    server.setMessageCallback(std::bind(&RpcProvider::OnMessage, this, std::placeholders::_1,
+                                        std::placeholders::_2, std::placeholders::_3));
 
     // 设置muduo库的线程数量
     server.setThreadNum(4);
@@ -68,11 +68,12 @@ void RpcProvider::Run()
     ZkClient zkCli;
     zkCli.Start();
     // service_name为永久性节点    method_name为临时性节点
-    for (auto &sp : m_serviceMap) 
+    for (auto &sp : m_serviceMap)
     {
         // /service_name   /UserServiceRpc
         std::string service_path = "/" + sp.first;
-        zkCli.Create(service_path.c_str(), nullptr, ZOO_SEQUENCE);
+        char service_data[128] = {0};
+        zkCli.Create(service_path.c_str(), nullptr, 0, 0);
         for (auto &mp : sp.second.m_methodMap)
         {
             // /service_name/method_name   /UserServiceRpc/Login 存储当前这个rpc服务节点主机的ip和port
@@ -80,7 +81,22 @@ void RpcProvider::Run()
             char method_path_data[128] = {0};
             sprintf(method_path_data, "%s:%d", ip.c_str(), port);
             // ZOO_EPHEMERAL表示znode是一个临时性节点
-            zkCli.Create(method_path.c_str(), method_path_data, strlen(method_path_data), ZOO_EPHEMERAL);
+            zkCli.Create(method_path.c_str(), method_path_data, strlen(method_path_data), 0);
+
+            // 创建真正节点
+            // create函数的逻辑是节点存在就不创建了，因此这里要判断节点是不是已经存在，不存在才创建
+            // todo:创建过程中遇到多个节点共同创建好像会遇到问题诶，
+            while (true)
+            {
+                auto nodeName = method_path + "/" + to_string(random());
+                if (zkCli.exists_node(nodeName.c_str()) == z_no_node)
+                { // zok表示节点不存在，节点存在是z_node_exists
+                    zkCli.Create(nodeName.c_str(), method_path_data, strlen(method_path_data), ZOO_EPHEMERAL);
+                    break;
+                }else{
+                    std::cout<<"node: "<<nodeName<<" already exists .try again"<<std::endl;
+                }
+            }
         }
     }
 
@@ -89,7 +105,7 @@ void RpcProvider::Run()
 
     // 启动网络服务
     server.start();
-    m_eventLoop.loop(); 
+    m_eventLoop.loop();
     /*
     这段代码是在启动网络服务和事件循环，其中server是一个TcpServer对象，m_eventLoop是一个EventLoop对象。
 
@@ -104,7 +120,7 @@ void RpcProvider::Run()
 // 新的socket连接回调
 void RpcProvider::OnConnection(const muduo::net::TcpConnectionPtr &conn)
 {
-    //如果是新连接就什么都不干，即正常的接收连接即可
+    // 如果是新连接就什么都不干，即正常的接收连接即可
     if (!conn->connected())
     {
         // 和rpc client的连接断开了
@@ -116,18 +132,18 @@ void RpcProvider::OnConnection(const muduo::net::TcpConnectionPtr &conn)
 在框架内部，RpcProvider和RpcConsumer协商好之间通信用的protobuf数据类型
 service_name method_name args    定义proto的message类型，进行数据头的序列化和反序列化
                                  service_name method_name args_size
-16UserServiceLoginzhang san123456   
+16UserServiceLoginzhang san123456
 
 header_size(4个字节) + header_str + args_str
 10 "10"
 10000 "1000000"
-std::string   insert和copy方法 
+std::string   insert和copy方法
 */
 // 已建立连接用户的读写事件回调 如果远程有一个rpc服务的调用请求，那么OnMessage方法就会响应
 // 这里来的肯定是一个远程调用请求
 // 因此本函数需要：解析请求，根据服务名，方法名，参数，来调用service的来callmethod来调用本地的业务
-void RpcProvider::OnMessage(const muduo::net::TcpConnectionPtr &conn, 
-                            muduo::net::Buffer *buffer, 
+void RpcProvider::OnMessage(const muduo::net::TcpConnectionPtr &conn,
+                            muduo::net::Buffer *buffer,
                             muduo::Timestamp)
 {
     // 网络上接收的远程rpc调用请求的字符流    Login args
@@ -135,7 +151,7 @@ void RpcProvider::OnMessage(const muduo::net::TcpConnectionPtr &conn,
 
     // 从字符流中读取前4个字节的内容
     uint32_t header_size = 0;
-    recv_buf.copy((char*)&header_size, 4, 0);
+    recv_buf.copy((char *)&header_size, 4, 0);
 
     // 根据header_size读取数据头的原始字符流，反序列化数据，得到rpc请求的详细信息
     std::string rpc_header_str = recv_buf.substr(4, header_size);
@@ -162,11 +178,11 @@ void RpcProvider::OnMessage(const muduo::net::TcpConnectionPtr &conn,
 
     // 打印调试信息
     std::cout << "============================================" << std::endl;
-    std::cout << "header_size: " << header_size << std::endl; 
-    std::cout << "rpc_header_str: " << rpc_header_str << std::endl; 
-    std::cout << "service_name: " << service_name << std::endl; 
-    std::cout << "method_name: " << method_name << std::endl; 
-    std::cout << "args_str: " << args_str << std::endl; 
+    std::cout << "header_size: " << header_size << std::endl;
+    std::cout << "rpc_header_str: " << rpc_header_str << std::endl;
+    std::cout << "service_name: " << service_name << std::endl;
+    std::cout << "method_name: " << method_name << std::endl;
+    std::cout << "args_str: " << args_str << std::endl;
     std::cout << "============================================" << std::endl;
 
     // 获取service对象和method对象
@@ -184,7 +200,7 @@ void RpcProvider::OnMessage(const muduo::net::TcpConnectionPtr &conn,
         return;
     }
 
-    google::protobuf::Service *service = it->second.m_service; // 获取service对象  new UserService
+    google::protobuf::Service *service = it->second.m_service;      // 获取service对象  new UserService
     const google::protobuf::MethodDescriptor *method = mit->second; // 获取method对象  Login
 
     // 生成rpc方法调用的请求request和响应response参数
@@ -198,16 +214,14 @@ void RpcProvider::OnMessage(const muduo::net::TcpConnectionPtr &conn,
 
     // 给下面的method方法的调用，绑定一个Closure的回调函数
     // closure是执行完本地方法之后会发生的回调，因此需要完成序列化和反向发送请求的操作
-    google::protobuf::Closure *done = google::protobuf::NewCallback<RpcProvider, 
-                                                                    const muduo::net::TcpConnectionPtr&, 
-                                                                    google::protobuf::Message*>
-                                                                    (this, 
-                                                                    &RpcProvider::SendRpcResponse, 
-                                                                    conn, response);
+    google::protobuf::Closure *done = google::protobuf::NewCallback<RpcProvider,
+                                                                    const muduo::net::TcpConnectionPtr &,
+                                                                    google::protobuf::Message *>(this,
+                                                                                                 &RpcProvider::SendRpcResponse,
+                                                                                                 conn, response);
 
     // 在框架上根据远端rpc请求，调用当前rpc节点上发布的方法
     // new UserService().Login(controller, request, response, done)
-
 
     /*
     为什么下面这个service->CallMethod 要这么写？或者说为什么这么写就可以直接调用远程业务方法了
@@ -222,7 +236,7 @@ void RpcProvider::OnMessage(const muduo::net::TcpConnectionPtr &conn,
 }
 
 // Closure的回调操作，用于序列化rpc的响应和网络发送
-void RpcProvider::SendRpcResponse(const muduo::net::TcpConnectionPtr& conn, google::protobuf::Message *response)
+void RpcProvider::SendRpcResponse(const muduo::net::TcpConnectionPtr &conn, google::protobuf::Message *response)
 {
     std::string response_str;
     if (response->SerializeToString(&response_str)) // response进行序列化
@@ -232,7 +246,7 @@ void RpcProvider::SendRpcResponse(const muduo::net::TcpConnectionPtr& conn, goog
     }
     else
     {
-        std::cout << "serialize response_str error!" << std::endl; 
+        std::cout << "serialize response_str error!" << std::endl;
     }
     conn->shutdown(); // 模拟http的短链接服务，由rpcprovider主动断开连接
 }
