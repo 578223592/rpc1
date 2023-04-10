@@ -169,6 +169,15 @@ typedef std::unordered_map<std::string, HashRing> serviceHashRingUMap;
     bool updateOneZKServiceInfo(const char *path);
     HashRing updateOneZKMethodInfo(const char *path);
 private:
+
+
+    /// @brief 连接ip和端口,并设置m_clientFd
+    /// @param ip ip地址，本机字节序
+    /// @param port 端口，本机字节序
+    /// @return 成功返回空字符串，否则返回失败信息
+    string newConnect(const char* ip,uint16_t port);
+//todo:记得初始化和每次节点变动可能涉及到重新连接
+    int m_clientFd;
     ZkClient m_zkCli;
     // 应该是一个方法就有一个hash环
     //  hash环，需要完成的功能有：1.记录全部的服务节点方法

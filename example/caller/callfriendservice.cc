@@ -44,6 +44,6 @@ int main(int argc, char **argv)
             std::cout << "rpc GetFriendsList response error : " << response.result().errmsg() << std::endl;
         }
     }
-
+    sleep(5); // sleep 5 seconds
     return 0;
 }

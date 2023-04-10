@@ -12,7 +12,7 @@ public:
     // 多个worker线程都会写日志queue 
     void Push(const T &data)
     {
-        std::lock_guard<std::mutex> lock(m_mutex);
+        std::lock_guard<std::mutex> lock(m_mutex); //使用lock_gurad，即RAII的思想保证锁正确释放
         m_queue.push(data);
         m_condvariable.notify_one();
     }
@@ -26,7 +26,6 @@ public:
             // 日志队列为空，线程进入wait状态
             m_condvariable.wait(lock);//这里用unique_lock是因为lock_guard不支持解锁，而unique_lock支持
         }
-
         T data = m_queue.front();
         m_queue.pop();
         return data;

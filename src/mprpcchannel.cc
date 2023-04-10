@@ -10,7 +10,6 @@
 #include "mprpcapplication.h"
 #include "mprpccontroller.h"
 
-
 /*
 header_size + service_name method_name args_size + args
 */
@@ -72,74 +71,61 @@ void MprpcChannel::CallMethod(const google::protobuf::MethodDescriptor *method,
     std::cout << "============================================" << std::endl;
 
     // 使用tcp编程，完成rpc方法的远程调用
-    int clientfd = socket(AF_INET, SOCK_STREAM, 0);
-    if (-1 == clientfd)
-    {
-        char errtxt[512] = {0};
-        sprintf(errtxt, "create socket error! errno:%d", errno);
-        controller->SetFailed(errtxt);
-        return;
-    }
-
-    // 读取配置文件rpcserver的信息
-    // std::string ip = MprpcApplication::GetInstance().GetConfig().Load("rpcserverip");
-    // uint16_t port = atoi(MprpcApplication::GetInstance().GetConfig().Load("rpcserverport").c_str());
-    // rpc调用方想调用service_name的method_name服务，需要查询zk上该服务所在的host信息
-    //  /UserServiceRpc/Login
-    std::string method_path = "/" + service_name + "/" + method_name;
-    // 127.0.0.1:8000
-    //show m_serviceUMap
-    for(auto it = m_serviceUMap.begin();it != m_serviceUMap.end();it++){
-        auto oneService = it->second;
-        cout<<"service name:"<<it->first<<endl;
-        for(auto itt = oneService.begin();itt != oneService.end();itt++){
-            cout<<"     method name:"<<itt->first<<endl;
-            auto hr =itt->second;
+    while (m_clientFd == -1)
+    { // 没有连接或者连接已经断开，那么就要重新连接呢,会一直不断地重试
+        // 读取配置文件rpcserver的信息
+        // std::string ip = MprpcApplication::GetInstance().GetConfig().Load("rpcserverip");
+        // uint16_t port = atoi(MprpcApplication::GetInstance().GetConfig().Load("rpcserverport").c_str());
+        // rpc调用方想调用service_name的method_name服务，需要查询zk上该服务所在的host信息
+        //  /UserServiceRpc/Login
+        std::string method_path = "/" + service_name + "/" + method_name;
+        // 127.0.0.1:8000
+        // show m_serviceUMap ，可以注释掉
+        for (auto it = m_serviceUMap.begin(); it != m_serviceUMap.end(); it++)
+        {
+            auto oneService = it->second;
+            cout << "service name:" << it->first << endl;
+            for (auto itt = oneService.begin(); itt != oneService.end(); itt++)
+            {
+                cout << "     method name:" << itt->first << endl;
+                auto hr = itt->second;
+            }
+            cout << "------------------" << endl;
         }
-        cout<<"------------------"<<endl;
-    }
 
-    //
-    HashRing *hrPtr = &m_serviceUMap["/" + service_name][method_path];
-    cout<<(hrPtr == nullptr)<<endl;
+        //
+        HashRing *hrPtr = &m_serviceUMap["/" + service_name][method_path];
+        cout << (hrPtr == nullptr) << endl;
 
-    std::string host_data = hrPtr->distributionNode(to_string(random()));
+        std::string host_data = hrPtr->distributionNode(to_string(random()));
 
-    cout << "host_data:" << host_data << endl;
+        cout << "host_data:" << host_data << endl;
 
-    if (host_data == "")
-    {
-        controller->SetFailed(method_path + " is not exist!");
-        return;
-    }
-    int idx = host_data.find(":");
-    if (idx == -1)
-    {
-        controller->SetFailed(method_path + " address is invalid!");
-        return;
-    }
-    std::string ip = host_data.substr(0, idx);
-    uint16_t port = atoi(host_data.substr(idx + 1, host_data.size() - idx).c_str());
-
-    struct sockaddr_in server_addr;
-    server_addr.sin_family = AF_INET;
-    server_addr.sin_port = htons(port);
-    server_addr.sin_addr.s_addr = inet_addr(ip.c_str());
-
-    // 连接rpc服务节点
-    if (-1 == connect(clientfd, (struct sockaddr *)&server_addr, sizeof(server_addr)))
-    {
-        close(clientfd);
-        char errtxt[512] = {0};
-        sprintf(errtxt, "connect error! errno:%d", errno);
-        controller->SetFailed(errtxt);
-        return;
+        if (host_data == "")
+        {
+            controller->SetFailed(method_path + " is not exist!");
+            return;
+        }
+        int idx = host_data.find(":");
+        if (idx == -1)
+        {
+            controller->SetFailed(method_path + " address is invalid!");
+            return;
+        }
+        std::string ip = host_data.substr(0, idx);
+        uint16_t port = atoi(host_data.substr(idx + 1, host_data.size() - idx).c_str());
+        string rt = newConnect(ip.c_str(), port);
+        if (!rt.empty())
+        {
+            controller->SetFailed(rt);
+            return;
+        }
     }
 
     // 发送rpc请求
-    if (-1 == send(clientfd, send_rpc_str.c_str(), send_rpc_str.size(), 0))
+    if (-1 == send(m_clientFd, send_rpc_str.c_str(), send_rpc_str.size(), 0))
     {
-        close(clientfd);
+        close(m_clientFd); m_clientFd = -1;
         char errtxt[512] = {0};
         sprintf(errtxt, "send error! errno:%d", errno);
         controller->SetFailed(errtxt);
@@ -149,9 +135,9 @@ void MprpcChannel::CallMethod(const google::protobuf::MethodDescriptor *method,
     // 接收rpc请求的响应值
     char recv_buf[1024] = {0};
     int recv_size = 0;
-    if (-1 == (recv_size = recv(clientfd, recv_buf, 1024, 0)))
+    if (-1 == (recv_size = recv(m_clientFd, recv_buf, 1024, 0)))
     {
-        close(clientfd);
+        close(m_clientFd); m_clientFd = -1;
         char errtxt[512] = {0};
         sprintf(errtxt, "recv error! errno:%d", errno);
         controller->SetFailed(errtxt);
@@ -163,17 +149,15 @@ void MprpcChannel::CallMethod(const google::protobuf::MethodDescriptor *method,
     // if (!response->ParseFromString(response_str))
     if (!response->ParseFromArray(recv_buf, recv_size))
     {
-        close(clientfd);
         char errtxt[1050] = {0};
         sprintf(errtxt, "parse error! response_str:%s", recv_buf);
         controller->SetFailed(errtxt);
         return;
     }
 
-    close(clientfd);
 }
 
-MprpcChannel::MprpcChannel()
+MprpcChannel::MprpcChannel():m_clientFd(-1)
 {
     cout << "begin to create MprpcChannel()..." << endl;
     // 读取配置文件rpcserver的信息
@@ -257,4 +241,32 @@ MprpcChannel::HashRing MprpcChannel::updateOneZKMethodInfo(const char *path)
         tHR.addNode(data);
     }
     return tHR;
+}
+
+string MprpcChannel::newConnect(const char *ip, uint16_t port)
+{
+    int clientfd = socket(AF_INET, SOCK_STREAM, 0);
+    if (-1 == clientfd)
+    {
+        char errtxt[512] = {0};
+        sprintf(errtxt, "create socket error! errno:%d", errno);
+        m_clientFd = -1;
+        return string(errtxt);
+    }
+
+    struct sockaddr_in server_addr;
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_port = htons(port);
+    server_addr.sin_addr.s_addr = inet_addr(ip);
+    // 连接rpc服务节点
+    if (-1 == connect(clientfd, (struct sockaddr *)&server_addr, sizeof(server_addr)))
+    {
+        close(clientfd);
+        char errtxt[512] = {0};
+        sprintf(errtxt, "connect error! errno:%d", errno);
+        m_clientFd = -1;
+        return string(errtxt);
+    }
+    m_clientFd = clientfd;
+    return "";
 }
