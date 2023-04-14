@@ -9,7 +9,7 @@ int main(int argc, char **argv)
 
     // 演示调用远程发布的rpc方法Login
     fixbug::FiendServiceRpc_Stub stub(new MprpcChannel());  //注册进自己写的channel类，channel类用于自定义发送格式和负责序列化等操作
-    // rpc方法的请求参数
+    // rpc方法的请求参数 
     fixbug::GetFriendsListRequest request;
     request.set_userid(1000);
     // rpc方法的响应
