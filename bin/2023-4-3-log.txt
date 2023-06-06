@@ -1,0 +1,15 @@
+15:43:17 =>[info] log start
+15:43:17 =>[info] service_name:FiendServiceRpc
+15:43:17 =>[info] method_name:GetFriendsList
+15:49:33 =>[info] log start
+15:49:33 =>[info] service_name:FiendServiceRpc
+15:49:33 =>[info] method_name:GetFriendsList
+17:34:40 =>[info] log start
+17:34:40 =>[info] service_name:FiendServiceRpc
+17:34:40 =>[info] method_name:GetFriendsList
+17:36:51 =>[info] log start
+17:36:51 =>[info] service_name:FiendServiceRpc
+17:36:51 =>[info] method_name:GetFriendsList
+17:37:26 =>[info] log start
+17:37:26 =>[info] service_name:FiendServiceRpc
+17:37:26 =>[info] method_name:GetFriendsList
