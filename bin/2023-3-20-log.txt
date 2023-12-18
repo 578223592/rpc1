@@ -1,3 +1,0 @@
-17:28:27 =>[info] log start
-17:28:27 =>[info] service_name:FiendServiceRpc
-17:28:27 =>[info] method_name:GetFriendsList
