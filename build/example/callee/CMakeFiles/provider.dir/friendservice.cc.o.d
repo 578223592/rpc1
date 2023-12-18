@@ -1,5 +1,5 @@
 example/callee/CMakeFiles/provider.dir/friendservice.cc.o: \
- /home/swx/mprpc/example/callee/friendservice.cc \
+ /home/swx/2023_project/rpc1/example/callee/friendservice.cc \
  /usr/include/stdc-predef.h /usr/include/c++/11/iostream \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -145,7 +145,8 @@ example/callee/CMakeFiles/provider.dir/friendservice.cc.o: \
  /usr/include/c++/11/bits/locale_facets.tcc \
  /usr/include/c++/11/bits/basic_ios.tcc \
  /usr/include/c++/11/bits/ostream.tcc /usr/include/c++/11/istream \
- /usr/include/c++/11/bits/istream.tcc /home/swx/mprpc/example/friend.pb.h \
+ /usr/include/c++/11/bits/istream.tcc \
+ /home/swx/2023_project/rpc1/example/friend.pb.h \
  /usr/include/c++/11/limits /usr/include/google/protobuf/port_def.inc \
  /usr/include/google/protobuf/port_undef.inc \
  /usr/include/google/protobuf/io/coded_stream.h /usr/include/assert.h \
@@ -280,10 +281,10 @@ example/callee/CMakeFiles/provider.dir/friendservice.cc.o: \
  /usr/include/google/protobuf/message.h \
  /usr/include/google/protobuf/extension_set.h /usr/include/c++/11/cassert \
  /usr/include/google/protobuf/service.h \
- /home/swx/mprpc/src/include/mprpcapplication.h \
- /home/swx/mprpc/src/include/mprpcconfig.h \
- /home/swx/mprpc/src/include/mprpcchannel.h /usr/include/c++/11/random \
- /usr/include/c++/11/cmath /usr/include/math.h \
+ /home/swx/2023_project/rpc1/src/include/mprpcapplication.h \
+ /home/swx/2023_project/rpc1/src/include/mprpcconfig.h \
+ /home/swx/2023_project/rpc1/src/include/mprpcchannel.h \
+ /usr/include/c++/11/random /usr/include/c++/11/cmath /usr/include/math.h \
  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
  /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
@@ -310,9 +311,9 @@ example/callee/CMakeFiles/provider.dir/friendservice.cc.o: \
  /usr/include/c++/11/bits/random.tcc /usr/include/c++/11/numeric \
  /usr/include/c++/11/bits/stl_numeric.h \
  /usr/include/c++/11/pstl/glue_numeric_defs.h \
- /home/swx/mprpc/src/include/zookeeperutil.h /usr/include/semaphore.h \
- /usr/include/x86_64-linux-gnu/bits/semaphore.h \
- /usr/local/include/zookeeper/zookeeper.h \
+ /home/swx/2023_project/rpc1/src/include/zookeeperutil.h \
+ /usr/include/semaphore.h /usr/include/x86_64-linux-gnu/bits/semaphore.h \
+ /usr/include/zookeeper/zookeeper.h \
  /usr/include/x86_64-linux-gnu/sys/socket.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
  /usr/include/x86_64-linux-gnu/bits/socket.h \
@@ -329,22 +330,17 @@ example/callee/CMakeFiles/provider.dir/friendservice.cc.o: \
  /usr/include/x86_64-linux-gnu/asm/sockios.h \
  /usr/include/asm-generic/sockios.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_osockaddr.h \
- /usr/include/x86_64-linux-gnu/sys/time.h \
- /usr/local/include/zookeeper/proto.h \
- /usr/local/include/zookeeper/zookeeper_version.h \
- /usr/local/include/zookeeper/recordio.h \
- /usr/local/include/zookeeper/zookeeper.jute.h \
- /home/swx/mprpc/src/include/mprpccontroller.h \
- /home/swx/mprpc/src/include/rpcprovider.h \
- /usr/local/include/muduo/net/TcpServer.h \
- /usr/local/include/muduo/base/Atomic.h \
- /usr/local/include/muduo/base/noncopyable.h \
- /usr/local/include/muduo/base/Types.h \
- /usr/local/include/muduo/net/TcpConnection.h \
- /usr/local/include/muduo/base/StringPiece.h \
- /usr/local/include/muduo/net/Callbacks.h \
- /usr/local/include/muduo/base/Timestamp.h \
- /usr/local/include/muduo/base/copyable.h \
+ /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/zookeeper/proto.h \
+ /usr/include/zookeeper/zookeeper_version.h \
+ /usr/include/zookeeper/recordio.h \
+ /usr/include/zookeeper/zookeeper.jute.h \
+ /home/swx/2023_project/rpc1/src/include/mprpccontroller.h \
+ /home/swx/2023_project/rpc1/src/include/rpcprovider.h \
+ /usr/include/muduo/net/TcpServer.h /usr/include/muduo/base/Atomic.h \
+ /usr/include/muduo/base/noncopyable.h /usr/include/muduo/base/Types.h \
+ /usr/include/muduo/net/TcpConnection.h \
+ /usr/include/muduo/base/StringPiece.h /usr/include/muduo/net/Callbacks.h \
+ /usr/include/muduo/base/Timestamp.h /usr/include/muduo/base/copyable.h \
  /usr/include/boost/operators.hpp /usr/include/boost/config.hpp \
  /usr/include/boost/config/user.hpp \
  /usr/include/boost/config/detail/select_compiler_config.hpp \
@@ -359,12 +355,10 @@ example/callee/CMakeFiles/provider.dir/friendservice.cc.o: \
  /usr/include/boost/config/helper_macros.hpp \
  /usr/include/boost/detail/workaround.hpp \
  /usr/include/boost/config/workaround.hpp \
- /usr/include/boost/core/addressof.hpp \
- /usr/local/include/muduo/net/Buffer.h \
- /usr/local/include/muduo/net/Endian.h \
- /usr/local/include/muduo/net/InetAddress.h /usr/include/netinet/in.h \
- /usr/include/x86_64-linux-gnu/bits/in.h /usr/include/boost/any.hpp \
- /usr/include/boost/type_index.hpp \
+ /usr/include/boost/core/addressof.hpp /usr/include/muduo/net/Buffer.h \
+ /usr/include/muduo/net/Endian.h /usr/include/muduo/net/InetAddress.h \
+ /usr/include/netinet/in.h /usr/include/x86_64-linux-gnu/bits/in.h \
+ /usr/include/boost/any.hpp /usr/include/boost/type_index.hpp \
  /usr/include/boost/type_index/stl_type_index.hpp \
  /usr/include/boost/type_index/type_index_facade.hpp \
  /usr/include/boost/container_hash/hash_fwd.hpp \
@@ -397,14 +391,13 @@ example/callee/CMakeFiles/provider.dir/friendservice.cc.o: \
  /usr/include/boost/utility/enable_if.hpp \
  /usr/include/boost/core/enable_if.hpp \
  /usr/include/boost/type_traits/is_same.hpp \
- /usr/local/include/muduo/net/EventLoop.h \
- /usr/local/include/muduo/base/Mutex.h \
- /usr/local/include/muduo/base/CurrentThread.h \
- /usr/local/include/muduo/net/TimerId.h \
- /home/swx/mprpc/src/include/logger.h \
- /home/swx/mprpc/src/include/lockqueue.h /usr/include/c++/11/queue \
- /usr/include/c++/11/deque /usr/include/c++/11/bits/stl_deque.h \
- /usr/include/c++/11/bits/deque.tcc /usr/include/c++/11/bits/stl_queue.h \
- /usr/include/c++/11/thread /usr/include/c++/11/bits/std_thread.h \
+ /usr/include/muduo/net/EventLoop.h /usr/include/muduo/base/Mutex.h \
+ /usr/include/muduo/base/CurrentThread.h /usr/include/muduo/net/TimerId.h \
+ /home/swx/2023_project/rpc1/src/include/logger.h \
+ /home/swx/2023_project/rpc1/src/include/lockqueue.h \
+ /usr/include/c++/11/queue /usr/include/c++/11/deque \
+ /usr/include/c++/11/bits/stl_deque.h /usr/include/c++/11/bits/deque.tcc \
+ /usr/include/c++/11/bits/stl_queue.h /usr/include/c++/11/thread \
+ /usr/include/c++/11/bits/std_thread.h \
  /usr/include/c++/11/bits/this_thread_sleep.h \
  /usr/include/c++/11/condition_variable /usr/include/c++/11/cstdarg

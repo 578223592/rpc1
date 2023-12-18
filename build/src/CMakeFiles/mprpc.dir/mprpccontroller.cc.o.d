@@ -1,6 +1,7 @@
 src/CMakeFiles/mprpc.dir/mprpccontroller.cc.o: \
- /home/swx/mprpc/src/mprpccontroller.cc /usr/include/stdc-predef.h \
- /home/swx/mprpc/src/include/mprpccontroller.h \
+ /home/swx/2023_project/rpc1/src/mprpccontroller.cc \
+ /usr/include/stdc-predef.h \
+ /home/swx/2023_project/rpc1/src/include/mprpccontroller.h \
  /usr/include/google/protobuf/service.h /usr/include/c++/11/string \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \

@@ -1,5 +1,5 @@
 example/caller/CMakeFiles/consumer.dir/callfriendservice.cc.o: \
- /home/swx/mprpc/example/caller/callfriendservice.cc \
+ /home/swx/2023_project/rpc1/example/caller/callfriendservice.cc \
  /usr/include/stdc-predef.h /usr/include/c++/11/iostream \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -146,8 +146,8 @@ example/caller/CMakeFiles/consumer.dir/callfriendservice.cc.o: \
  /usr/include/c++/11/bits/basic_ios.tcc \
  /usr/include/c++/11/bits/ostream.tcc /usr/include/c++/11/istream \
  /usr/include/c++/11/bits/istream.tcc \
- /home/swx/mprpc/src/include/mprpcapplication.h \
- /home/swx/mprpc/src/include/mprpcconfig.h \
+ /home/swx/2023_project/rpc1/src/include/mprpcapplication.h \
+ /home/swx/2023_project/rpc1/src/include/mprpcconfig.h \
  /usr/include/c++/11/unordered_map \
  /usr/include/c++/11/ext/aligned_buffer.h \
  /usr/include/c++/11/bits/hashtable.h \
@@ -159,7 +159,7 @@ example/caller/CMakeFiles/consumer.dir/callfriendservice.cc.o: \
  /usr/include/c++/11/bits/node_handle.h \
  /usr/include/c++/11/bits/unordered_map.h \
  /usr/include/c++/11/bits/erase_if.h \
- /home/swx/mprpc/src/include/mprpcchannel.h \
+ /home/swx/2023_project/rpc1/src/include/mprpcchannel.h \
  /usr/include/google/protobuf/service.h \
  /usr/include/google/protobuf/stubs/callback.h \
  /usr/include/google/protobuf/stubs/macros.h \
@@ -302,9 +302,9 @@ example/caller/CMakeFiles/consumer.dir/callfriendservice.cc.o: \
  /usr/include/c++/11/bits/random.tcc /usr/include/c++/11/numeric \
  /usr/include/c++/11/bits/stl_numeric.h \
  /usr/include/c++/11/pstl/glue_numeric_defs.h \
- /home/swx/mprpc/src/include/zookeeperutil.h /usr/include/semaphore.h \
- /usr/include/x86_64-linux-gnu/bits/semaphore.h \
- /usr/local/include/zookeeper/zookeeper.h \
+ /home/swx/2023_project/rpc1/src/include/zookeeperutil.h \
+ /usr/include/semaphore.h /usr/include/x86_64-linux-gnu/bits/semaphore.h \
+ /usr/include/zookeeper/zookeeper.h \
  /usr/include/x86_64-linux-gnu/sys/socket.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
  /usr/include/x86_64-linux-gnu/bits/socket.h \
@@ -321,13 +321,12 @@ example/caller/CMakeFiles/consumer.dir/callfriendservice.cc.o: \
  /usr/include/x86_64-linux-gnu/asm/sockios.h \
  /usr/include/asm-generic/sockios.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_osockaddr.h \
- /usr/include/x86_64-linux-gnu/sys/time.h \
- /usr/local/include/zookeeper/proto.h \
- /usr/local/include/zookeeper/zookeeper_version.h \
- /usr/local/include/zookeeper/recordio.h \
- /usr/local/include/zookeeper/zookeeper.jute.h \
- /home/swx/mprpc/src/include/mprpccontroller.h \
- /home/swx/mprpc/example/friend.pb.h \
+ /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/zookeeper/proto.h \
+ /usr/include/zookeeper/zookeeper_version.h \
+ /usr/include/zookeeper/recordio.h \
+ /usr/include/zookeeper/zookeeper.jute.h \
+ /home/swx/2023_project/rpc1/src/include/mprpccontroller.h \
+ /home/swx/2023_project/rpc1/example/friend.pb.h \
  /usr/include/google/protobuf/generated_message_table_driven.h \
  /usr/include/google/protobuf/map.h \
  /usr/include/google/protobuf/map_type_handler.h \

@@ -248,5 +248,6 @@ void RpcProvider::SendRpcResponse(const muduo::net::TcpConnectionPtr &conn, goog
     {
         std::cout << "serialize response_str error!" << std::endl;
     }
-    conn->shutdown(); // 模拟http的短链接服务，由rpcprovider主动断开连接
+//    std::cout<<"[func-RpcProvider::SendRpcResponse:] 处理完毕，关闭连接"<<std::endl;
+//    conn->shutdown(); // 模拟http的短链接服务，由rpcprovider主动断开连接，这里只是单向关闭
 }

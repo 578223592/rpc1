@@ -1,0 +1,9 @@
+21:57:42 =>[info] log start
+21:57:42 =>[info] service_name:FiendServiceRpc
+21:57:42 =>[info] method_name:GetFriendsList
+22:5:51 =>[info] log start
+22:5:51 =>[info] service_name:FiendServiceRpc
+22:5:51 =>[info] method_name:GetFriendsList
+22:19:17 =>[info] log start
+22:19:17 =>[info] service_name:FiendServiceRpc
+22:19:17 =>[info] method_name:GetFriendsList

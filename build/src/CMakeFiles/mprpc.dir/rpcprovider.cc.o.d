@@ -1,6 +1,7 @@
 src/CMakeFiles/mprpc.dir/rpcprovider.cc.o: \
- /home/swx/mprpc/src/rpcprovider.cc /usr/include/stdc-predef.h \
- /home/swx/mprpc/src/include/rpcprovider.h \
+ /home/swx/2023_project/rpc1/src/rpcprovider.cc \
+ /usr/include/stdc-predef.h \
+ /home/swx/2023_project/rpc1/src/include/rpcprovider.h \
  /usr/include/google/protobuf/service.h /usr/include/c++/11/string \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -240,15 +241,11 @@ src/CMakeFiles/mprpc.dir/rpcprovider.cc.o: \
  /usr/include/c++/11/pstl/glue_memory_defs.h /usr/include/c++/11/set \
  /usr/include/c++/11/bits/stl_set.h \
  /usr/include/c++/11/bits/stl_multiset.h \
- /usr/local/include/muduo/net/TcpServer.h \
- /usr/local/include/muduo/base/Atomic.h \
- /usr/local/include/muduo/base/noncopyable.h \
- /usr/local/include/muduo/base/Types.h \
- /usr/local/include/muduo/net/TcpConnection.h \
- /usr/local/include/muduo/base/StringPiece.h \
- /usr/local/include/muduo/net/Callbacks.h \
- /usr/local/include/muduo/base/Timestamp.h \
- /usr/local/include/muduo/base/copyable.h \
+ /usr/include/muduo/net/TcpServer.h /usr/include/muduo/base/Atomic.h \
+ /usr/include/muduo/base/noncopyable.h /usr/include/muduo/base/Types.h \
+ /usr/include/muduo/net/TcpConnection.h \
+ /usr/include/muduo/base/StringPiece.h /usr/include/muduo/net/Callbacks.h \
+ /usr/include/muduo/base/Timestamp.h /usr/include/muduo/base/copyable.h \
  /usr/include/boost/operators.hpp /usr/include/c++/11/iterator \
  /usr/include/c++/11/bits/stream_iterator.h /usr/include/boost/config.hpp \
  /usr/include/boost/config/user.hpp \
@@ -264,11 +261,9 @@ src/CMakeFiles/mprpc.dir/rpcprovider.cc.o: \
  /usr/include/boost/config/helper_macros.hpp \
  /usr/include/boost/detail/workaround.hpp \
  /usr/include/boost/config/workaround.hpp \
- /usr/include/boost/core/addressof.hpp \
- /usr/local/include/muduo/net/Buffer.h \
- /usr/local/include/muduo/net/Endian.h \
- /usr/local/include/muduo/net/InetAddress.h /usr/include/netinet/in.h \
- /usr/include/x86_64-linux-gnu/sys/socket.h \
+ /usr/include/boost/core/addressof.hpp /usr/include/muduo/net/Buffer.h \
+ /usr/include/muduo/net/Endian.h /usr/include/muduo/net/InetAddress.h \
+ /usr/include/netinet/in.h /usr/include/x86_64-linux-gnu/sys/socket.h \
  /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
  /usr/include/x86_64-linux-gnu/bits/socket.h \
  /usr/include/x86_64-linux-gnu/bits/socket_type.h \
@@ -318,10 +313,9 @@ src/CMakeFiles/mprpc.dir/rpcprovider.cc.o: \
  /usr/include/boost/utility/enable_if.hpp \
  /usr/include/boost/core/enable_if.hpp \
  /usr/include/boost/type_traits/is_same.hpp \
- /usr/local/include/muduo/net/EventLoop.h /usr/include/c++/11/atomic \
- /usr/local/include/muduo/base/Mutex.h \
- /usr/local/include/muduo/base/CurrentThread.h \
- /usr/local/include/muduo/net/TimerId.h \
+ /usr/include/muduo/net/EventLoop.h /usr/include/c++/11/atomic \
+ /usr/include/muduo/base/Mutex.h /usr/include/muduo/base/CurrentThread.h \
+ /usr/include/muduo/net/TimerId.h \
  /usr/include/google/protobuf/descriptor.h \
  /usr/include/google/protobuf/stubs/mutex.h /usr/include/c++/11/mutex \
  /usr/include/c++/11/chrono /usr/include/c++/11/ratio \
@@ -330,9 +324,9 @@ src/CMakeFiles/mprpc.dir/rpcprovider.cc.o: \
  /usr/include/c++/11/bits/std_mutex.h \
  /usr/include/c++/11/bits/unique_lock.h \
  /usr/include/google/protobuf/stubs/once.h \
- /home/swx/mprpc/src/include/mprpcapplication.h \
- /home/swx/mprpc/src/include/mprpcconfig.h \
- /home/swx/mprpc/src/include/mprpcchannel.h \
+ /home/swx/2023_project/rpc1/src/include/mprpcapplication.h \
+ /home/swx/2023_project/rpc1/src/include/mprpcconfig.h \
+ /home/swx/2023_project/rpc1/src/include/mprpcchannel.h \
  /usr/include/google/protobuf/message.h \
  /usr/include/google/protobuf/stubs/casts.h \
  /usr/include/google/protobuf/arena.h \
@@ -387,16 +381,15 @@ src/CMakeFiles/mprpc.dir/rpcprovider.cc.o: \
  /usr/include/c++/11/bits/random.tcc /usr/include/c++/11/numeric \
  /usr/include/c++/11/bits/stl_numeric.h \
  /usr/include/c++/11/pstl/glue_numeric_defs.h \
- /home/swx/mprpc/src/include/zookeeperutil.h /usr/include/semaphore.h \
- /usr/include/x86_64-linux-gnu/bits/semaphore.h \
- /usr/local/include/zookeeper/zookeeper.h \
- /usr/include/x86_64-linux-gnu/sys/time.h \
- /usr/local/include/zookeeper/proto.h \
- /usr/local/include/zookeeper/zookeeper_version.h \
- /usr/local/include/zookeeper/recordio.h \
- /usr/local/include/zookeeper/zookeeper.jute.h \
- /home/swx/mprpc/src/include/mprpccontroller.h \
- /home/swx/mprpc/src/include/rpcheader.pb.h \
+ /home/swx/2023_project/rpc1/src/include/zookeeperutil.h \
+ /usr/include/semaphore.h /usr/include/x86_64-linux-gnu/bits/semaphore.h \
+ /usr/include/zookeeper/zookeeper.h \
+ /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/zookeeper/proto.h \
+ /usr/include/zookeeper/zookeeper_version.h \
+ /usr/include/zookeeper/recordio.h \
+ /usr/include/zookeeper/zookeeper.jute.h \
+ /home/swx/2023_project/rpc1/src/include/mprpccontroller.h \
+ /home/swx/2023_project/rpc1/src/include/rpcheader.pb.h \
  /usr/include/google/protobuf/generated_message_table_driven.h \
  /usr/include/google/protobuf/map.h \
  /usr/include/google/protobuf/map_type_handler.h \
@@ -407,10 +400,11 @@ src/CMakeFiles/mprpc.dir/rpcprovider.cc.o: \
  /usr/include/google/protobuf/map_field_lite.h \
  /usr/include/google/protobuf/inlined_string_field.h \
  /usr/include/google/protobuf/extension_set.h /usr/include/c++/11/cassert \
- /home/swx/mprpc/src/include/logger.h \
- /home/swx/mprpc/src/include/lockqueue.h /usr/include/c++/11/queue \
- /usr/include/c++/11/deque /usr/include/c++/11/bits/stl_deque.h \
- /usr/include/c++/11/bits/deque.tcc /usr/include/c++/11/bits/stl_queue.h \
- /usr/include/c++/11/thread /usr/include/c++/11/bits/std_thread.h \
+ /home/swx/2023_project/rpc1/src/include/logger.h \
+ /home/swx/2023_project/rpc1/src/include/lockqueue.h \
+ /usr/include/c++/11/queue /usr/include/c++/11/deque \
+ /usr/include/c++/11/bits/stl_deque.h /usr/include/c++/11/bits/deque.tcc \
+ /usr/include/c++/11/bits/stl_queue.h /usr/include/c++/11/thread \
+ /usr/include/c++/11/bits/std_thread.h \
  /usr/include/c++/11/bits/this_thread_sleep.h \
  /usr/include/c++/11/condition_variable /usr/include/c++/11/cstdarg

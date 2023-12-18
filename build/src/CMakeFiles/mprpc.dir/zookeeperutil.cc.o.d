@@ -1,7 +1,9 @@
 src/CMakeFiles/mprpc.dir/zookeeperutil.cc.o: \
- /home/swx/mprpc/src/zookeeperutil.cc /usr/include/stdc-predef.h \
- /home/swx/mprpc/src/include/zookeeperutil.h /usr/include/semaphore.h \
- /usr/include/features.h /usr/include/features-time64.h \
+ /home/swx/2023_project/rpc1/src/zookeeperutil.cc \
+ /usr/include/stdc-predef.h \
+ /home/swx/2023_project/rpc1/src/include/zookeeperutil.h \
+ /usr/include/semaphore.h /usr/include/features.h \
+ /usr/include/features-time64.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
  /usr/include/x86_64-linux-gnu/bits/timesize.h \
  /usr/include/x86_64-linux-gnu/sys/cdefs.h \
@@ -35,7 +37,7 @@ src/CMakeFiles/mprpc.dir/zookeeperutil.cc.o: \
  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
  /usr/include/x86_64-linux-gnu/bits/semaphore.h \
- /usr/local/include/zookeeper/zookeeper.h /usr/include/c++/11/stdlib.h \
+ /usr/include/zookeeper/zookeeper.h /usr/include/c++/11/stdlib.h \
  /usr/include/c++/11/cstdlib \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -76,10 +78,13 @@ src/CMakeFiles/mprpc.dir/zookeeperutil.cc.o: \
  /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
  /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h /usr/include/ctype.h \
- /usr/local/include/zookeeper/proto.h \
- /usr/local/include/zookeeper/zookeeper_version.h \
- /usr/local/include/zookeeper/recordio.h \
- /usr/local/include/zookeeper/zookeeper.jute.h /usr/include/c++/11/string \
+ /usr/include/zookeeper/proto.h \
+ /usr/include/zookeeper/zookeeper_version.h \
+ /usr/include/zookeeper/recordio.h \
+ /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
+ /usr/include/x86_64-linux-gnu/bits/wchar.h \
+ /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /usr/include/zookeeper/zookeeper.jute.h /usr/include/c++/11/string \
  /usr/include/c++/11/bits/stringfwd.h \
  /usr/include/c++/11/bits/memoryfwd.h \
  /usr/include/c++/11/bits/char_traits.h \
@@ -99,13 +104,9 @@ src/CMakeFiles/mprpc.dir/zookeeperutil.cc.o: \
  /usr/include/c++/11/bits/ptr_traits.h /usr/include/c++/11/debug/debug.h \
  /usr/include/c++/11/bits/predefined_ops.h \
  /usr/include/c++/11/bits/postypes.h /usr/include/c++/11/cwchar \
- /usr/include/wchar.h /usr/include/x86_64-linux-gnu/bits/wchar.h \
- /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
+ /usr/include/wchar.h /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \
- /usr/include/c++/11/cstdint \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
- /usr/include/c++/11/bits/allocator.h \
+ /usr/include/c++/11/cstdint /usr/include/c++/11/bits/allocator.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++allocator.h \
  /usr/include/c++/11/ext/new_allocator.h /usr/include/c++/11/new \
  /usr/include/c++/11/bits/exception.h \
@@ -154,8 +155,8 @@ src/CMakeFiles/mprpc.dir/zookeeperutil.cc.o: \
  /usr/include/c++/11/bits/stl_vector.h \
  /usr/include/c++/11/bits/stl_bvector.h \
  /usr/include/c++/11/bits/vector.tcc \
- /home/swx/mprpc/src/include/mprpcapplication.h \
- /home/swx/mprpc/src/include/mprpcconfig.h \
+ /home/swx/2023_project/rpc1/src/include/mprpcapplication.h \
+ /home/swx/2023_project/rpc1/src/include/mprpcconfig.h \
  /usr/include/c++/11/unordered_map \
  /usr/include/c++/11/ext/aligned_buffer.h \
  /usr/include/c++/11/bits/hashtable.h \
@@ -167,7 +168,7 @@ src/CMakeFiles/mprpc.dir/zookeeperutil.cc.o: \
  /usr/include/c++/11/bits/node_handle.h \
  /usr/include/c++/11/bits/unordered_map.h \
  /usr/include/c++/11/bits/erase_if.h \
- /home/swx/mprpc/src/include/mprpcchannel.h \
+ /home/swx/2023_project/rpc1/src/include/mprpcchannel.h \
  /usr/include/google/protobuf/service.h \
  /usr/include/google/protobuf/stubs/callback.h \
  /usr/include/google/protobuf/stubs/macros.h \
@@ -326,4 +327,4 @@ src/CMakeFiles/mprpc.dir/zookeeperutil.cc.o: \
  /usr/include/c++/11/bits/random.tcc /usr/include/c++/11/numeric \
  /usr/include/c++/11/bits/stl_numeric.h \
  /usr/include/c++/11/pstl/glue_numeric_defs.h \
- /home/swx/mprpc/src/include/mprpccontroller.h
+ /home/swx/2023_project/rpc1/src/include/mprpccontroller.h

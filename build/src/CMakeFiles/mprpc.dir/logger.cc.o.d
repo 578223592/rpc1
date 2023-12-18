@@ -1,7 +1,9 @@
-src/CMakeFiles/mprpc.dir/logger.cc.o: /home/swx/mprpc/src/logger.cc \
- /usr/include/stdc-predef.h /home/swx/mprpc/src/include/logger.h \
- /home/swx/mprpc/src/include/lockqueue.h /usr/include/c++/11/queue \
- /usr/include/c++/11/deque /usr/include/c++/11/bits/stl_algobase.h \
+src/CMakeFiles/mprpc.dir/logger.cc.o: \
+ /home/swx/2023_project/rpc1/src/logger.cc /usr/include/stdc-predef.h \
+ /home/swx/2023_project/rpc1/src/include/logger.h \
+ /home/swx/2023_project/rpc1/src/include/lockqueue.h \
+ /usr/include/c++/11/queue /usr/include/c++/11/deque \
+ /usr/include/c++/11/bits/stl_algobase.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
  /usr/include/features.h /usr/include/features-time64.h \

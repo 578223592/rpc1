@@ -78,6 +78,7 @@ void MprpcChannel::CallMethod(const google::protobuf::MethodDescriptor *method,
         // uint16_t port = atoi(MprpcApplication::GetInstance().GetConfig().Load("rpcserverport").c_str());
         // rpc调用方想调用service_name的method_name服务，需要查询zk上该服务所在的host信息
         //  /UserServiceRpc/Login
+
         std::string method_path = "/" + service_name + "/" + method_name;
         // 127.0.0.1:8000
         // show m_serviceUMap ，可以注释掉
@@ -87,7 +88,7 @@ void MprpcChannel::CallMethod(const google::protobuf::MethodDescriptor *method,
             cout << "service name:" << it->first << endl;
             for (auto itt = oneService.begin(); itt != oneService.end(); itt++)
             {
-                cout << "     method name:" << itt->first << endl;
+                cout << " \t\t\tmethod name:" << itt->first << endl;
                 auto hr = itt->second;
             }
             cout << "------------------" << endl;

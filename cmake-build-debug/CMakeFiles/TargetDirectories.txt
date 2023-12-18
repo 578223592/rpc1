@@ -1,0 +1,13 @@
+/home/swx/2023_project/rpc1/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/swx/2023_project/rpc1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/swx/2023_project/rpc1/cmake-build-debug/src/CMakeFiles/mprpc.dir
+/home/swx/2023_project/rpc1/cmake-build-debug/src/CMakeFiles/edit_cache.dir
+/home/swx/2023_project/rpc1/cmake-build-debug/src/CMakeFiles/rebuild_cache.dir
+/home/swx/2023_project/rpc1/cmake-build-debug/example/CMakeFiles/edit_cache.dir
+/home/swx/2023_project/rpc1/cmake-build-debug/example/CMakeFiles/rebuild_cache.dir
+/home/swx/2023_project/rpc1/cmake-build-debug/example/callee/CMakeFiles/provider.dir
+/home/swx/2023_project/rpc1/cmake-build-debug/example/callee/CMakeFiles/edit_cache.dir
+/home/swx/2023_project/rpc1/cmake-build-debug/example/callee/CMakeFiles/rebuild_cache.dir
+/home/swx/2023_project/rpc1/cmake-build-debug/example/caller/CMakeFiles/consumer.dir
+/home/swx/2023_project/rpc1/cmake-build-debug/example/caller/CMakeFiles/edit_cache.dir
+/home/swx/2023_project/rpc1/cmake-build-debug/example/caller/CMakeFiles/rebuild_cache.dir

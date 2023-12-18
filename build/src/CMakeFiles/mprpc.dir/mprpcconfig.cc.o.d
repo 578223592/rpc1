@@ -1,6 +1,7 @@
 src/CMakeFiles/mprpc.dir/mprpcconfig.cc.o: \
- /home/swx/mprpc/src/mprpcconfig.cc /usr/include/stdc-predef.h \
- /home/swx/mprpc/src/include/mprpcconfig.h \
+ /home/swx/2023_project/rpc1/src/mprpcconfig.cc \
+ /usr/include/stdc-predef.h \
+ /home/swx/2023_project/rpc1/src/include/mprpcconfig.h \
  /usr/include/c++/11/unordered_map /usr/include/c++/11/type_traits \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \

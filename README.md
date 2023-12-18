@@ -3,7 +3,19 @@
 
 # 使用说明
 ## 环境准备
-protobuf、gdb、muduo、boost
+protobuf、gdb、muduo、boost、zookeeper服務器和庫
+### zookeeper
+庫
+```angular2html
+sudo apt-get install libzookeeper-mt2
+```
+服務器
+https://blog.csdn.net/weixin_47025166/article/details/125405156
+頭文件
+```angular2html
+sudo apt-get install libzookeeper-mt-dev
+
+```
 ## 使用准备
 以一个最简单的获取frinedList功能为例介绍，介绍如何使用。
 

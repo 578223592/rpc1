@@ -11,7 +11,7 @@ class FriendService : public fixbug::FiendServiceRpc
 public:
     std::vector<std::string> GetFriendsList(uint32_t userid)
     {
-        std::cout << "do GetFriendsList service! userid:" << userid << std::endl;
+        std::cout << "local do GetFriendsList service! userid:" << userid << std::endl;
         std::vector<std::string> vec;
         vec.push_back("gao yang");
         vec.push_back("liu hong");

@@ -1,4 +1,4 @@
-# Install script for directory: /home/swx/mprpc
+# Install script for directory: /home/swx/2023_project/rpc1
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,8 +44,8 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/swx/mprpc/build/src/cmake_install.cmake")
-  include("/home/swx/mprpc/build/example/cmake_install.cmake")
+  include("/home/swx/2023_project/rpc1/build/src/cmake_install.cmake")
+  include("/home/swx/2023_project/rpc1/build/example/cmake_install.cmake")
 
 endif()
 
@@ -57,5 +57,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/swx/mprpc/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/swx/2023_project/rpc1/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
